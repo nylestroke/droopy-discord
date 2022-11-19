@@ -14,7 +14,7 @@
 [license-shield]: https://img.shields.io/badge/License-Apache%202.0-white.svg
 [migration-shield]: https://img.shields.io/badge/Wiki-Migrating%20from%20V3-darkgreen.svg
 
-<img align="right" src="https://github.com/DV8FromTheWorld/JDA/blob/assets/assets/readme/logo.png?raw=true" height="200" width="200">
+<img align="right" src="https://i.ibb.co/FD5gz2n/N.png" height="200" width="200">
 
 [ ![maven-central][] ][download]
 [ ![jitpack][] ](https://jitpack.io/#DV8FromtheWorld/JDA)
