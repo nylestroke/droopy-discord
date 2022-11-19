@@ -16,5 +16,5 @@ Navigate to .env.example file and change this fields:
 TOKEN=token_here
 SERVER_ID=id_here
 ```
-TOKEN is your bot token -> _You can find is here [discord.dev](https://discord.com/developers/applications)_;
-SERVER_OD is your discord channel id -> _You need to enable discord developer mode to may copy from channel id_
+#### TOKEN is your bot token -> _You can find is here [discord.dev](https://discord.com/developers/applications)_;
+#### SERVER_ID is your discord channel id -> _You need to enable discord developer mode to may copy from channel id_
