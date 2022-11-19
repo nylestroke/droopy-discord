@@ -7,4 +7,11 @@ JDA strives to provide a clean and full wrapping of the Discord REST api and its
 This library is a helpful tool that provides the functionality to create a discord bot in java.
 _Please see the [Discord docs](https://discord.com/developers/docs/reference) for more information about bot accounts._
 
-## Installation process
+# Environment configration
+
+### Example
+
+```env
+TOKEN=token_here
+SERVER_ID=id_here
+```
