@@ -23,6 +23,7 @@ public class BotCommand implements ICommand, ICommandOption {
     ) {
         this.name = name;
         this.description = description;
+        this.useOptions = false;
     }
 
     public BotCommand(

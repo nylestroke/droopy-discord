@@ -1,5 +1,6 @@
 package me.nylestroke.droopy.listeners;
 
+import me.nylestroke.droopy.commands.rolesCmd;
 import me.nylestroke.droopy.commands.userinfoCmd;
 import me.nylestroke.droopy.handlers.CommandHandler;
 import me.nylestroke.droopy.models.BotCommand;
@@ -23,6 +24,7 @@ public class CommandInteraction extends ListenerAdapter {
         DefaultGuildChannelUnion defaultChannel = event.getGuild().getDefaultChannel();
 
         CommandHandler.addCommand(new userinfoCmd());
+        CommandHandler.addCommand(new rolesCmd());
 
         if (!(currentGuild == serverId)) {
             defaultChannel.asStandardGuildMessageChannel()
