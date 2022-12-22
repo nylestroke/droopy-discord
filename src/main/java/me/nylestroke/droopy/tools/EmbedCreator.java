@@ -1,4 +1,4 @@
-package me.nylestroke.droopy;
+package me.nylestroke.droopy.tools;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -7,9 +7,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class EmbedCreator {
-    EmbedBuilder embed = new EmbedBuilder();
+    private static final EmbedBuilder embed = new EmbedBuilder();
 
-    public MessageEmbed createEmbed (
+    public static MessageEmbed createEmbed (
             String title,
             String author,
             String authorLogo,
