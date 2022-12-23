@@ -1,4 +1,4 @@
-package me.nylestroke.droopy.commands;
+package me.nylestroke.droopy.commands.server;
 
 import me.nylestroke.droopy.models.BotCommand;
 import me.nylestroke.droopy.tools.EmbedCreator;
@@ -11,7 +11,9 @@ public class rolesCmd extends BotCommand {
     public rolesCmd() {
         super(
                 "roles",
-                "Get list of all roles from current guild"
+                "Get list of all roles from current guild",
+                false,
+                null
         );
     }
 
@@ -19,7 +21,6 @@ public class rolesCmd extends BotCommand {
     public void exec(@NotNull SlashCommandInteractionEvent event) {
         event.deferReply().setEphemeral(true).queue();
 
-        MessageEmbed embed;
         String response = "";
 
         for (Role role : event.getGuild().getRoles()) {
@@ -28,7 +29,7 @@ public class rolesCmd extends BotCommand {
             }
         }
 
-        embed = EmbedCreator.createEmbed(
+        MessageEmbed embed = EmbedCreator.createEmbed(
                 event.getGuild().getName() + " roles",
                 null,
                 null,

@@ -11,4 +11,8 @@ public enum LoggerColors {
     LoggerColors(String color) {
         this.ANSI_COLOR = color;
     }
+
+    public String getValue() {
+        return ANSI_COLOR;
+    }
 }

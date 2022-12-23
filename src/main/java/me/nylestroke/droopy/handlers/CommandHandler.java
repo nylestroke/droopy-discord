@@ -18,12 +18,7 @@ public class CommandHandler {
                     Commands.slash(
                             command.getName(),
                             command.getDescription()
-                    ).addOption(
-                            command.optionType(),
-                            command.optionName(),
-                            command.optionDescription(),
-                            command.optionRequired()
-                    )
+                    ).addOptions(command.getOptions())
             );
         } else {
             commandDataList.add(Commands.slash(command.getName(), command.getDescription()));

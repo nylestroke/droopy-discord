@@ -1,6 +1,6 @@
 package me.nylestroke.droopy;
 
-import me.nylestroke.droopy.listeners.CommandInteraction;
+import me.nylestroke.droopy.listeners.CommandListener;
 import me.nylestroke.droopy.listeners.EventListener;
 import me.nylestroke.droopy.tools.Configuration;
 import me.nylestroke.droopy.tools.Logger;
@@ -33,7 +33,7 @@ public class DroopyMain {
             // Register listeners and handlers
             builder.addEventListeners(
                     new EventListener(),
-                    new CommandInteraction()
+                    new CommandListener()
             );
 
             // Build and start the bot

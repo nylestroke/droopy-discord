@@ -1,4 +1,4 @@
-package me.nylestroke.droopy.commands;
+package me.nylestroke.droopy.commands.utils;
 
 import me.nylestroke.droopy.models.BotCommand;
 import me.nylestroke.droopy.tools.EmbedCreator;
@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.format.DateTimeFormatter;
@@ -20,20 +21,23 @@ public class userinfoCmd extends BotCommand {
                 "userinfo",
                 "Get information about specify user.",
                 true,
-                "userinfo",
-                "Mentioned user",
-                true,
-                OptionType.USER
+                new OptionData[] {
+                        new OptionData(
+                                OptionType.USER,
+                                "target",
+                                "Target mentioned user",
+                                true
+                        )
+                }
         );
     }
 
     @Override
     public void exec(@NotNull SlashCommandInteractionEvent event) {
-        User user = event.getOption("userinfo").getAsUser();
-        Member member = event.getOption("userinfo").getAsMember();
+        User user = event.getOption("target").getAsUser();
+        Member member = event.getOption("target").getAsMember();
         event.deferReply().queue();
 
-        MessageEmbed embed;
         ArrayList<String[]> embedFields = new ArrayList<>();
         String memberRoles = "";
 
@@ -54,7 +58,7 @@ public class userinfoCmd extends BotCommand {
         embedFields.add(new String[]{"Server Member Since", member.getTimeJoined().format(DateTimeFormatter.ofPattern("MMMM dd yyyy HH:mm:ss"))});
         embedFields.add(new String[]{"Discord Member Since", user.getTimeCreated().format(DateTimeFormatter.ofPattern("MMMM dd yyyy HH:mm:ss"))});
 
-        embed = EmbedCreator.createEmbed(
+        MessageEmbed embed = EmbedCreator.createEmbed(
                 user.isBot() ? "Bot Information" : null,
                 user.getName(),
                 user.getEffectiveAvatarUrl(),

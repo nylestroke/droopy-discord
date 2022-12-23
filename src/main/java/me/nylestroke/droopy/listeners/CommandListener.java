@@ -1,7 +1,12 @@
 package me.nylestroke.droopy.listeners;
 
-import me.nylestroke.droopy.commands.rolesCmd;
-import me.nylestroke.droopy.commands.userinfoCmd;
+import me.nylestroke.droopy.commands.server.avatarCmd;
+import me.nylestroke.droopy.commands.server.pingCmd;
+import me.nylestroke.droopy.commands.server.rolesCmd;
+import me.nylestroke.droopy.commands.utils.clearCmd;
+import me.nylestroke.droopy.commands.utils.guessCmd;
+import me.nylestroke.droopy.commands.utils.randomCmd;
+import me.nylestroke.droopy.commands.utils.userinfoCmd;
 import me.nylestroke.droopy.handlers.CommandHandler;
 import me.nylestroke.droopy.models.BotCommand;
 import me.nylestroke.droopy.tools.Configuration;
@@ -10,11 +15,10 @@ import net.dv8tion.jda.api.entities.channel.unions.DefaultGuildChannelUnion;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandInteraction extends ListenerAdapter {
+public class CommandListener extends ListenerAdapter {
 
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
@@ -23,8 +27,14 @@ public class CommandInteraction extends ListenerAdapter {
         CommandListUpdateAction updateAction = event.getGuild().updateCommands();
         DefaultGuildChannelUnion defaultChannel = event.getGuild().getDefaultChannel();
 
+        // Adding commands
         CommandHandler.addCommand(new userinfoCmd());
         CommandHandler.addCommand(new rolesCmd());
+        CommandHandler.addCommand(new clearCmd());
+        CommandHandler.addCommand(new avatarCmd());
+        CommandHandler.addCommand(new pingCmd());
+        CommandHandler.addCommand(new guessCmd());
+        CommandHandler.addCommand(new randomCmd());
 
         if (!(currentGuild == serverId)) {
             defaultChannel.asStandardGuildMessageChannel()
@@ -38,18 +48,15 @@ public class CommandInteraction extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         String command = event.getName();
+        BotCommand cmd = CommandHandler.getCommandExec(command);
 
-        for (CommandData botCmd : CommandHandler.getCommandData()) {
-            if (command.equalsIgnoreCase(botCmd.getName())) {
-                BotCommand cmd = CommandHandler.getCommandExec(botCmd.getName());
-                try {
-                    cmd.exec(event);
-                } catch (Exception exception) {
-                    Logger.error(exception);
-                } finally {
-                    Logger.info("Command " + cmd.getName() + " executed.");
-                }
-            }
+        try {
+            cmd.exec(event);
+            Logger.successful(cmd.getName() + " successfully executed!");
+        } catch (Exception exception) {
+            Logger.error(exception);
+        } finally {
+            Logger.info("Command " + cmd.getName() + " executed.");
         }
     }
 }
